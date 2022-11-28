@@ -8,7 +8,8 @@ ffi = result and ffi
 
 -- used by ffi only
 -- to work around this whole metatype knot
-local newComplex
+local newComplexFloat
+local newComplexDouble
 
 local complex
 if not ffi then
@@ -43,9 +44,10 @@ if not ffi then
 else
 	complex = {}
 	complex.__index = complex
+
 	setmetatable(complex, {
 		__call = function(complex, ...)
-			return newComplex(...)
+			return newComplexDouble(...)
 		end,
 	})
 
@@ -249,8 +251,10 @@ end
 
 -- only after all the complex metatables and metatable.__index elements are set ...
 -- (which means don't touch 'complex' after this)
+-- (TODO maybe hide this behind one more layer of abstraction so that the default constructed metatype can be swapped out, i.e. complex float for complex double)
 if ffi then
-	newComplex = ffi.metatype('complex', complex)
+	newComplexDouble = ffi.metatype('complex double', complex)
+	newComplexFloat = ffi.metatype('complex float', complex)
 end
 
 return complex
