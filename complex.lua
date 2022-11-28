@@ -252,6 +252,7 @@ end
 -- only after all the complex metatables and metatable.__index elements are set ...
 -- (which means don't touch 'complex' after this)
 -- (TODO maybe hide this behind one more layer of abstraction so that the default constructed metatype can be swapped out, i.e. complex float for complex double)
+-- (notice that, in the case of adding more complex types than just complex float and complex double, that might mean abstracting complex:isa as well)
 if ffi then
 	newComplexDouble = ffi.metatype('complex double', complex)
 	newComplexFloat = ffi.metatype('complex float', complex)

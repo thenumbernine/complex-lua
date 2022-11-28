@@ -1,4 +1,4 @@
-Complex math for LuaJIT
+Complex math for LuaJIT.
 Moved from my symmath-lua project into its own library.
 In vanilla Lua this creates a class table (using my lua-ext project).
 In LuaJIT this modifies the 'complex double' and 'complex float' metatypes and returns their metatable.
