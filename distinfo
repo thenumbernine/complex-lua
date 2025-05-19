@@ -1,0 +1,9 @@
+name = "complex"
+files = {
+	["README.md"] = "complex/README.md",
+	["complex-dev-1.rockspec"] = "complex/complex-dev-1.rockspec",
+	["complex.lua"] = "complex/complex.lua",
+}
+deps = {
+	"ext",
+}
