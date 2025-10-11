@@ -8,8 +8,8 @@ ffi = result and ffi
 
 -- used by ffi only
 -- to work around this whole metatype knot
-local newComplexFloat
-local newComplexDouble
+local complexFloatType
+local complexDoubleType
 
 local complex
 if not ffi then
@@ -47,12 +47,12 @@ else
 
 	setmetatable(complex, {
 		__call = function(complex, ...)
-			return newComplexDouble(...)
+			return complexDoubleType(...)
 		end,
 	})
 
-	local complexFloatType = ffi.typeof(ffi.new'complex float')
-	local complexDoubleType = ffi.typeof(ffi.new'complex double')
+	complexFloatType = ffi.typeof'complex float'
+	complexDoubleType = ffi.typeof'complex double'
 
 	-- called with class as 1st param
 	function complex:isa(x)
@@ -254,8 +254,8 @@ end
 -- (TODO maybe hide this behind one more layer of abstraction so that the default constructed metatype can be swapped out, i.e. complex float for complex double)
 -- (notice that, in the case of adding more complex types than just complex float and complex double, that might mean abstracting complex:isa as well)
 if ffi then
-	newComplexDouble = ffi.metatype('complex double', complex)
-	newComplexFloat = ffi.metatype('complex float', complex)
+	ffi.metatype(complexDoubleType, complex)
+	ffi.metatype(complexFloatType, complex)
 end
 
 return complex
