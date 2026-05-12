@@ -3,6 +3,9 @@
 --------------------------------------------
 
 name = "complex"
+
+git = "https://github.com/thenumbernine/complex-lua"
+
 files = {
 	"README.md",
 	"complex-dev-1.rockspec",
